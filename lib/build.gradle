@@ -8,19 +8,12 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
-
-publishing {
-    publications {
-        pixlhash(MavenPublication) {
-            groupId 'de.baerinteractive'
-            artifactId 'pixlhash'
-            version '0.1.0'
-            artifact("$buildDir/outputs/aar/lib-release.aar")
-        }
-    }
-}
+group = "de.baerinteractive"
+archivesBaseName = "pixlhash"
+version = "0.1.0"
 
 repositories {
     jcenter()
@@ -34,7 +27,7 @@ android {
         minSdkVersion 1
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "0.1.0"
     }
 
     compileOptions {
@@ -52,4 +45,55 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'PixlHash'
+                packaging 'aar'
+                artifactId 'pixlhash'
+                description 'This library is used to convert a String into a visual representation.' +
+                        'This representation is returned as a Bitmap.' +
+                        'It can be used as an Avatar or other form of identification.'
+                url 'https://github.com/Fettn/Android-PixlHash'
+
+                scm {
+                    connection 'scm:git:https://github.com/Fettn/Android-PixlHash.git'
+                    developerConnection 'scm:git:https://github.com/Fettn/Android-PixlHash.git'
+                    url 'https://github.com/Fettn/Android-PixlHash'
+                }
+
+                licenses {
+                    license {
+                        name 'The MIT License'
+                        url 'https://opensource.org/licenses/MIT'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'fettn'
+                        name 'Fettn'
+                        email 'fettn@baerinteractive.de'
+                    }
+                }
+            }
+        }
+    }
 }
