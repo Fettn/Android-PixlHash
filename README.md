@@ -19,9 +19,11 @@ Bitmap bitmap2 = pixlHash.getPixlHash("example-image");
 ##Results
 
 test-string:
+
 ![](images/test-string.jpg)
 
 example-image:
+
 ![](images/example-image.jpg)
 
 ## Author
