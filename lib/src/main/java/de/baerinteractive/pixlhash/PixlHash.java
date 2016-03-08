@@ -78,7 +78,7 @@ public class PixlHash {
     }
 
     protected static int[] getPixelData(byte[] input, int position) {
-        int offset = position / (input.length - 1);
+        int offset = position / (input.length - 1) * 2;
         int start = position % (input.length - 1);
         long data = (((long) input[start]) & 0xFF) << 8 | (((long) input[start + 1]) & 0xFF);
         int coordinateData = (int) ((data >> (16 - 7 - offset)) & 0x7F);
