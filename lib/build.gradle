@@ -16,7 +16,7 @@ publishing {
         pixlhash(MavenPublication) {
             groupId 'de.baerinteractive'
             artifactId 'pixlhash'
-            version '0.0.1-SNAPSHOT'
+            version '0.1.0'
             artifact("$buildDir/outputs/aar/lib-release.aar")
         }
     }

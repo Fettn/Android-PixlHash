@@ -2,9 +2,6 @@ package de.baerinteractive.pixlhash;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by fettn on 20/02/16.
- */
 public class PixlHashTest {
 
     @org.junit.Test

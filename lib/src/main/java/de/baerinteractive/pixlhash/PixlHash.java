@@ -5,9 +5,6 @@ import android.graphics.Bitmap;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Created by fettn on 19/02/16.
- */
 public class PixlHash {
 
     public static final int WIDTH = 16;
